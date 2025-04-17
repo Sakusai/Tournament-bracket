@@ -9,7 +9,7 @@
 
 ## 🚀 Getting started
 
-### 🐳 Avec docker (pas encore dispo)
+### 🐳 Avec docker
 
 Pour démarrer le projet avec Docker, exécutez la commande suivante :
 
@@ -24,3 +24,4 @@ Pour démarrer le projet en local, exécutez la commande suivante :
 ```sh
 $ npm run dev
 ```
+

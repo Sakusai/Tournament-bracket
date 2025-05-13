@@ -8,9 +8,14 @@ const key = new TextEncoder().encode(process.env.SESSION_SECRET)
 
 const cookie = {
     name: 'session',
-    options: {httpOnly: true, secure: true, sameSite: 'lax', path: '/'},
-    duration: 24 * 60 * 60 * 1000
-}
+    options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+    },
+    duration: 24 * 60 * 60 * 1000,
+};
+
 export async function encrypt(payload){
     return new SignJWT(payload)
         .setProtectedHeader({alg: 'HS256'})
@@ -34,18 +39,18 @@ export async function createSession(userId: string) {
     const session = await encrypt({userId, expires});
 
     (await cookies()).set(cookie.name as any, session as any, {...cookie.options, expires} as any)
-    console.log((await cookies()).getAll())
-    redirect('/dashboard')
+    redirect('/')
 }
 export async function verifySession() {
-    const cookieL = (await cookies()).get(cookie.name as any)?.value
-    const session = await decrypt(cookieL)
+    const cookieStore = await cookies(); // ← ici c’est obligatoire d’utiliser await
+    const sessionCookie = cookieStore.get('session')?.value;
+    const session = await decrypt(sessionCookie);
 
-    if(!session?.userId) {
-        redirect('/login')
+    if (!session?.userId) {
+        return { redirectTo: '/login' };
     }
 
-    return { userId: session.userId }
+    return { userId: session.userId };
 }
 export async function deleteSession() {
     const cookieStore = await cookies()

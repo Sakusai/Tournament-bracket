@@ -8,8 +8,78 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String
-  password String
-  name  String?
+  id                 Int          @id @default(autoincrement())
+  name               String
+  email              String       @unique
+  password           String
+  roles              Role[]       @default([ROLE_USER])
+  players            Player[]
+  createdTournaments Tournament[] @relation("CreatorTournaments")
+}
+
+enum Role {
+  ROLE_USER
+  ROLE_ADMIN
+}
+
+model Player {
+  id             Int             @id @default(autoincrement())
+  nickname       String
+  userId         Int?
+  user           User?            @relation(fields: [userId], references: [id])
+  participations Participation[]
+
+  matchesAsPlayer1 Match[] @relation("Player1")
+  matchesAsPlayer2 Match[] @relation("Player2")
+  matchesAsWinner  Match[] @relation("Winner")
+}
+
+model Tournament {
+  id           Int              @id @default(autoincrement())
+  name         String
+  game         String
+  description  String?
+  logo         String?
+  date         DateTime
+  address      String
+  code         String
+  city         String
+  createdById  Int
+  createdBy    User             @relation("CreatorTournaments", fields: [createdById], references: [id])
+  participants Participation[]
+  matches      Match[]
+  status       TournamentStatus @default(UPCOMING)
+}
+
+enum TournamentStatus {
+  UPCOMING
+  ONGOING
+  COMPLETED
+}
+
+model Participation {
+  id           Int        @id @default(autoincrement())
+  playerId     Int
+  tournamentId Int
+  player       Player     @relation(fields: [playerId], references: [id])
+  tournament   Tournament @relation(fields: [tournamentId], references: [id])
+  seed         Int?
+}
+
+model Match {
+  id           Int        @id @default(autoincrement())
+  tournamentId Int
+  tournament   Tournament @relation(fields: [tournamentId], references: [id])
+
+  player1Id Int?
+  player1   Player? @relation("Player1", fields: [player1Id], references: [id])
+
+  player2Id Int?
+  player2   Player? @relation("Player2", fields: [player2Id], references: [id])
+
+  winnerId Int?
+  winner   Player? @relation("Winner", fields: [winnerId], references: [id])
+
+  round           Int
+  bracketPosition Int
 }

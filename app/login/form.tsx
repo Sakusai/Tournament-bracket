@@ -1,55 +1,56 @@
 'use client';
 
 import { login } from '@/app/login/actions';
-import Link from 'next/link';
-import { useFormState, useFormStatus } from 'react-dom';
 import {useActionState} from "react";
 
 export function LoginForm() {
-    const [state, action] = useActionState(login, undefined);
+    const [state, action, pending] = useActionState(login, undefined);
 
     return (
-        <form action={action}>
-            <div className="flex flex-col gap-2">
-                <div>
-                    <label htmlFor="email">Email</label>
-                    <input
-                        id="email"
-                        name="email"
-                        placeholder="m@example.com"
-                        type="email"
-                    />
-                    {state?.errors?.email && (
-                        <p className="text-sm text-red-500">{state.errors.email}</p>
-                    )}
-                </div>
-                <div className="mt-4">
-                    <div className="flex items-center justify-between">
-                        <label htmlFor="password">Password</label>
-                        <Link className="text-sm underline" href="#">
-                            Forgot your password?
-                        </Link>
-                    </div>
-                    <input id="password" type="password" name="password" />
-                    {state?.errors?.password && (
-                        <p className="text-sm text-red-500">{state.errors.password}</p>
-                    )}
-                </div>
-                {state?.message && (
-                    <p className="text-sm text-red-500">{state.message}</p>
+        <form action={action} className="space-y-4">
+            <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                    Email
+                </label>
+                <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="m@example.com"
+                    className="bg-white border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                />
+                {state?.errors?.email && (
+                    <p className="text-sm text-red-500 mt-1">{state.errors.email}</p>
                 )}
-                <LoginButton />
             </div>
+
+            <div>
+                <div className="flex items-center justify-between">
+                    <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                        Password
+                    </label>
+                    <a href="/forgot-password" className="text-sm text-indigo-600 hover:underline">
+                        Forgot your password?
+                    </a>
+                </div>
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    className="bg-white border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                />
+                {state?.errors?.password && (
+                    <p className="text-sm text-red-500 mt-1">{state.errors.password}</p>
+                )}
+            </div>
+
+            <button
+                type="submit"
+                disabled={pending}
+                className="w-full py-2 px-4 rounded-xl bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition"
+            >
+                {pending ? "Loading..." : "Login"}
+            </button>
         </form>
-    );
-}
-
-export function LoginButton() {
-    const { pending } = useFormStatus();
-
-    return (
-        <button aria-disabled={pending} type="submit" className="mt-4 w-full">
-            {pending ? 'Submitting...' : 'Sign up'}
-        </button>
     );
 }

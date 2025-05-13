@@ -44,7 +44,7 @@ const Navbar = () => {
                                 </button>
                             </Link>
                             <Link
-                                href="/dashboard"
+                                href={`/user/${userId}`}
                                 className="text-white flex items-center gap-2 hover:text-gray-300"
                             >
                                 <FaUserCircle size={30} />

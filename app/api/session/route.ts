@@ -1,4 +1,3 @@
-// app/api/session/route.ts
 import { NextResponse } from 'next/server';
 import {verifySession} from "@/app/_lib/session";
 

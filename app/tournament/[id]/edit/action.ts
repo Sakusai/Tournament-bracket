@@ -1,4 +1,3 @@
-// actions.ts
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import {tournamentSchema} from "@/app/_lib/definitions";

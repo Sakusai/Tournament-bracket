@@ -105,7 +105,14 @@ export default function Players({ params }: { params: Promise<{ id: string }> })
             setDeleting(false);
         }
     };
-    if (loading) return <div>Loading...</div>;
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-gray-900 text-white p-6 mt-16">
+                <h1 className="text-3xl font-bold mb-8">Next tournaments</h1>
+                <p>Loading tournaments...</p>
+            </div>
+        );
+    }
     if (error) return <div>Error : {error}</div>;
 
     const total = players.length;

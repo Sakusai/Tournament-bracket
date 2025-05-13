@@ -90,13 +90,12 @@ export default function Players({ params }: { params: Promise<{ id: string }> })
         setDeleting(true);
 
         try {
-            const res = await fetch(`/api/tournaments/${id}/players`, {
+            const res = await fetch(`/api/tournaments/${id}/players/${playerId}`, {
                 method: "DELETE",
-                body: JSON.stringify({ playerId: playerId}),
             });
 
             if (res.ok) {
-                window.location.href = "/";
+                window.location.href = `/tournament/${id}/players`;
             } else {
                 alert("Error");
             }
@@ -130,7 +129,7 @@ export default function Players({ params }: { params: Promise<{ id: string }> })
                                     type="text"
                                     value={nickname}
                                     onChange={(e) => setNickname(e.target.value)}
-                                    placeholder="Pseudo du joueur"
+                                    placeholder="Nickname"
                                     className="flex-1 px-4 py-2 bg-gray-700 border border-gray-600 rounded text-white focus:outline-none"
                                 />
                                 <button
@@ -153,7 +152,7 @@ export default function Players({ params }: { params: Promise<{ id: string }> })
                                     disabled={deleting}
                                     className="bg-red-600 hover:bg-red-700 text-white text-sm px-2 py-1 rounded transition disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
-                                    {deleting ? "Suppression..." : "Supprimer"}
+                                    {deleting ? "Deleting..." : "Delete"}
                                 </button>
                             </li>
                         ))}
@@ -169,7 +168,7 @@ export default function Players({ params }: { params: Promise<{ id: string }> })
                         </button>
 
                         <span>
-                            Page {page} over {totalPages}
+                            Page {page} on {totalPages}
                         </span>
 
                         <button

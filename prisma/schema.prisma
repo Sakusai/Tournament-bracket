@@ -64,6 +64,7 @@ model Participation {
   player       Player     @relation(fields: [playerId], references: [id])
   tournament   Tournament @relation(fields: [tournamentId], references: [id])
   seed         Int?
+  @@unique([playerId, tournamentId])
 }
 
 model Match {

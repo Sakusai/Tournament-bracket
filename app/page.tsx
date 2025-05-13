@@ -23,8 +23,7 @@ function TournamentsContent() {
         const loadTournaments = async () => {
             try {
                 const res = await fetch("/api/tournaments");
-                if (!res.ok)
-                    throw new Error("Erreur lors du chargement");
+                if (!res.ok) throw new Error("Erreur lors du chargement");
 
                 const data = await res.json();
                 const upcoming = data.filter(

@@ -98,7 +98,7 @@ export const Sidebar = ({ id }: { id: string }) =>
                 <li>
                     <Link
                         href={`/tournament/${id}`}
-                        className="block py-2 px-4 rounded hover:bg-gray-700 transition bg-indigo-600"
+                        className="block py-2 px-4 rounded hover:bg-gray-700 transition"
                     >
                         Informations
                     </Link>

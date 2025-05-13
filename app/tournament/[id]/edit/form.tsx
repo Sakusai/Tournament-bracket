@@ -1,4 +1,4 @@
-// app/tournaments/[id]/edit/Form.tsx
+// app/tournaments/[playerId]/edit/Form.tsx
 "use client";
 
 import React from "react";

@@ -1,4 +1,4 @@
-// app/api/tournaments/[id]/route.ts
+// app/api/tournaments/[playerId]/route.ts
 
 import prisma from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
@@ -107,6 +107,49 @@ export async function PATCH(
         console.error("Error updating tournament:", error);
         return NextResponse.json(
             { error: "Failed to update tournament", details: error.message },
+            { status: 500 }
+        );
+    }
+}
+
+export async function DELETE(
+    req: NextRequest,
+    { params }: { params: Promise<{ id: string }> }
+) {
+    const session = await verifySession();
+    if ("redirectTo" in session) {
+        return NextResponse.redirect(session.redirectTo);
+    }
+
+    const { id } = await params;
+    const tournamentId = parseInt(id, 10);
+
+    if (isNaN(tournamentId)) {
+        return NextResponse.json({ error: "Invalid tournament ID" }, { status: 400 });
+    }
+
+    try {
+        const tournament = await prisma.tournament.findUnique({
+            where: { id: tournamentId },
+        });
+
+        if (!tournament) {
+            return NextResponse.json({ error: "Tournament not found" }, { status: 404 });
+        }
+
+        if (parseInt(session.userId) !== tournament.createdById) {
+            return NextResponse.json({ error: "Forbidden: You are not the owner" }, { status: 403 });
+        }
+
+        await prisma.tournament.delete({
+            where: { id: tournamentId },
+        });
+
+        return NextResponse.json({ success: true, message: "Tournament deleted successfully" }, { status: 200 });
+    } catch (error: any) {
+        console.error("Error deleting tournament:", error);
+        return NextResponse.json(
+            { error: "Failed to delete tournament", details: error.message },
             { status: 500 }
         );
     }

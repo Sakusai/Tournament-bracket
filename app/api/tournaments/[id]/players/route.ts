@@ -22,7 +22,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
             nickname: p.player.nickname,
             userId: p.player.userId,
         }));
-
+        console.log(data, "data")
         return new Response(JSON.stringify(data), {
             status: 200,
             headers: {

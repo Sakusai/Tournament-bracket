@@ -15,7 +15,8 @@ export function SignupForm() {
                     id="name"
                     name="name"
                     type="text"
-                    className="mt-1 w-full rounded-xl border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    placeholder="John Doe"
+                    className="bg-white border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 />
                 {state?.errors?.name && (
                     <p className="text-sm text-red-500 mt-1">{state.errors.name}</p>
@@ -30,7 +31,8 @@ export function SignupForm() {
                     id="email"
                     name="email"
                     type="email"
-                    className="mt-1 w-full rounded-xl border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    placeholder="m@example.com"
+                    className="bg-white border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 />
                 {state?.errors?.email && (
                     <p className="text-sm text-red-500 mt-1">{state.errors.email}</p>
@@ -45,7 +47,8 @@ export function SignupForm() {
                     id="password"
                     name="password"
                     type="password"
-                    className="mt-1 w-full rounded-xl border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    placeholder="*********************"
+                    className="bg-white border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 />
                 {state?.errors?.password && (
                     <p className="text-sm text-red-500 mt-1">{state.errors.password}</p>

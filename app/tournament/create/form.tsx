@@ -102,7 +102,7 @@ export function CreateForm() {
                 disabled={pending}
                 className="w-full py-2 px-4 rounded-xl bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition"
             >
-                {pending ? "Loading..." : "Login"}
+                {pending ? "Creating..." : "Create"}
             </button>
         </form>
     );

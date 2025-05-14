@@ -1,7 +1,7 @@
 
 import prisma from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
-import { getLogoUrl } from "@/app/_lib/b2Client";
+import {getLogoUrl, uploadImage} from "@/app/_lib/b2Client";
 import {verifySession} from "@/app/_lib/session";
 
 
@@ -83,8 +83,7 @@ export async function PATCH(
 
         let logo = tournament.logo;
         if (logoFile && logoFile.size > 0) {
-            // TODO: implémenter l'upload
-            logo = logoFile.name;
+            logo = await uploadImage(logoFile);
         }
 
         const updatedTournament = await prisma.tournament.update({

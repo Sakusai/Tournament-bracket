@@ -8,7 +8,6 @@ export default function ProfilePage() {
         id: number;
         name: string;
         email: string;
-        players: { id: number; nickname: string }[];
         createdTournaments: { id: number; name: string }[];
     } | null>(null);
     const [loading, setLoading] = useState(true);
@@ -19,7 +18,6 @@ export default function ProfilePage() {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                // --- Étape 1 : Récupérer la session ---
                 const sessionRes = await fetch("/api/session");
 
                 if (!sessionRes.ok) {
@@ -68,11 +66,9 @@ export default function ProfilePage() {
                     }
                 }
 
-                // --- Mise à jour du state ---
                 setUser({
                     ...userData.user,
                     createdTournaments: tournamentsData.tournaments || [],
-                    players: [], // À remplacer par un appel à `/api/user/[id]/players` si disponible
                 });
 
                 setNewName(userData.user.name);
@@ -112,7 +108,7 @@ export default function ProfilePage() {
 
             setUser((prev) => (prev ? { ...prev, name: newName } : prev));
             setEditingName(false);
-            alert("✅ Update name !");
+            alert("Update name !");
         } catch (err) {
             alert("Network error");
         }
@@ -120,7 +116,7 @@ export default function ProfilePage() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-gray-900 text-white p-6 mt-16">
+            <div className="min-h-screen bg-gray-900 text-white p-6">
                 <h1 className="text-3xl font-bold mb-8">Next tournaments</h1>
                 <p>Loading tournaments...</p>
             </div>
@@ -194,7 +190,6 @@ export default function ProfilePage() {
                     </div>
                 </div>
 
-                {/* Tournois créés */}
                 <div className="bg-gray-800 p-6 rounded-lg shadow-md">
                     <h2 className="text-xl font-semibold mb-4">Your tournaments</h2>
                     {user.createdTournaments.length === 0 && (

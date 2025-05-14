@@ -45,7 +45,6 @@ export default function TournamentsContent() {
         setPage(1);
     }, [searchTerm, tournaments]);
 
-    // Pagination
     const totalPages = Math.ceil(filteredTournaments.length / tournamentsPerPage);
     const paginatedTournaments = filteredTournaments.slice(
         (page - 1) * tournamentsPerPage,
@@ -60,7 +59,7 @@ export default function TournamentsContent() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-gray-900 text-white p-6 mt-16">
+            <div className="min-h-screen bg-gray-900 text-white p-6">
                 <h1 className="text-3xl font-bold mb-8">Next tournaments</h1>
                 <p>Loading tournaments...</p>
             </div>

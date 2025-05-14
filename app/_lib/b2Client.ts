@@ -8,7 +8,6 @@ export const s3Client = new S3Client({
         secretAccessKey: process.env.B2_SECRET_ACCESS_KEY!,
         accessKeyId: process.env.B2_ACCESS_KEY_ID!,
     },
-    // B2 does not support checksums requests/responses
     requestChecksumCalculation: "WHEN_REQUIRED",
     responseChecksumValidation: "WHEN_REQUIRED",
 })
@@ -19,7 +18,6 @@ export async function uploadImage(logo: File) {
         Bucket: process.env.B2_BUCKET_NAME!,
         Key: `uploads/${Date.now()}-${logo.name}`,
         Body: buffer,
-        // ContentType: file.mimetype,
     };
     try {
         await s3Client.send(new PutObjectCommand(params));

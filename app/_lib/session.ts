@@ -42,7 +42,7 @@ export async function createSession(userId: string) {
     redirect('/')
 }
 export async function verifySession() {
-    const cookieStore = await cookies(); // ← ici c’est obligatoire d’utiliser await
+    const cookieStore = await cookies();
     const sessionCookie = cookieStore.get('session')?.value;
     const session = await decrypt(sessionCookie);
 

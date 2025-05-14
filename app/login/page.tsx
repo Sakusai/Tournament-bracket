@@ -4,7 +4,6 @@ import Link from 'next/link';
 export default function Page() {
     return (
         <div className="relative h-screen w-full">
-            {/* 🔁 Image de fond */}
             <div className="absolute inset-0">
                 <img
                     src="/background.jpg"

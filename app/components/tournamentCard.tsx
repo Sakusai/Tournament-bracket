@@ -21,16 +21,14 @@ export default function TournamentCard({ tournament }: { tournament: Tournament 
 
     return (
         <div className="bg-gray-800 border border-gray-700 rounded-xl shadow-md overflow-hidden transition hover:shadow-indigo-500/20 hover:border-indigo-500 flex">
-            {/* Logo à gauche */}
             {tournament.logoUrl && (
                 <img
                     src={tournament.logoUrl}
                     alt={tournament.name}
-                    className="w-24 h-24 object-cover" // Taille fixe pour un carré
+                    className="w-24 h-24 object-cover"
                 />
             )}
 
-            {/* Contenu à droite */}
             <div className="p-5 flex flex-col justify-between">
                 <div>
                     <h2 className="text-xl font-semibold">{tournament.name}</h2>

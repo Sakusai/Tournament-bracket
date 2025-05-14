@@ -49,6 +49,12 @@ const Navbar = () => {
                             >
                                 <FaUserCircle size={30} />
                             </Link>
+                            <Link href={'/logout'}
+                            >
+                                <button className="bg-red-600 hover:bg-red-700 text-white text-sm px-2 py-1 rounded transition disabled:opacity-50 disabled:cursor-not-allowed">
+                                    Logout
+                                </button>
+                            </Link>
                         </div>
                     ) : (
                         <Link

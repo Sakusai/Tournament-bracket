@@ -12,5 +12,5 @@ export default function Page() {
 
         doLogout();
     }, []);
-    return <p>Logout...</p>;
+    return <p className="min-h-screen bg-gray-900 text-white p-6"></p>;
 }

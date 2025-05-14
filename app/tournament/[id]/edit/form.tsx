@@ -1,4 +1,3 @@
-// app/tournaments/[playerId]/edit/Form.tsx
 "use client";
 
 import React from "react";
@@ -39,7 +38,6 @@ export default function Form({ tournament }: { tournament: Tournament }) {
                 )}
             </div>
 
-            {/* Jeu */}
             <div>
                 <label htmlFor="game" className="block text-sm font-medium text-white mb-1">
                     Game

@@ -24,10 +24,5 @@ function userDTO(user) {
         name: user.name,
         email: user.email,
         session: user.session,
-        auditTrail: canViewAudit(user.auditTrail, user.roles),
     }
-}
-
-function canViewAudit(auditTrail, roles) {
-    return roles === 'ROLE_ADMIN' ? auditTrail : null
 }

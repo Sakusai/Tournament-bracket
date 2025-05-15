@@ -32,8 +32,7 @@ export default function TournamentDetailPage({ params }: { params: Promise<{ id:
     if (loading) {
         return (
             <div className="min-h-screen bg-gray-900 text-white p-6">
-                <h1 className="text-3xl font-bold mb-8">Next tournaments</h1>
-                <p>Loading tournaments...</p>
+                <p>Loading tournament...</p>
             </div>
         );
     }

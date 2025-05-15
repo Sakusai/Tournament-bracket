@@ -25,6 +25,7 @@ export default function Form({ tournament }: { tournament: Tournament }) {
 
             <div>
                 <label htmlFor="name" className="block text-sm font-medium text-white mb-1">
+                    Name
                 </label>
                 <input
                     id="name"
